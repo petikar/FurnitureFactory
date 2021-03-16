@@ -1,7 +1,7 @@
-package com.example.springBoot.controller.v1;
+package com.example.v1.controller;
 
-import com.example.springBoot.model.v1.Material;
-import com.example.springBoot.service.v1.MaterialService;
+import com.example.v1.model.Material;
+import com.example.v1.service.MaterialService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

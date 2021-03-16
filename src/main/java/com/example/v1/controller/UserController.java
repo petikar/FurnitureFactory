@@ -1,8 +1,8 @@
-package com.example.springBoot.controller.v1;
+package com.example.v1.controller;
 
 
-import com.example.springBoot.model.v1.User;
-import com.example.springBoot.service.v1.UserService;
+import com.example.v1.model.User;
+import com.example.v1.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

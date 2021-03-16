@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("desk")
+@RequestMapping("desks")
 public class DeskRestController extends AbstractProductRestController<Desk, DeskServiceImpl> {
     public DeskRestController(DeskServiceImpl service) {
         super(service);

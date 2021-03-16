@@ -2,9 +2,7 @@ package com.example.springBoot.model.product;
 
 import com.example.springBoot.model.enumClasses.Color;
 import com.example.springBoot.model.enumClasses.ProductType;
-import com.example.springBoot.model.material.Mdf;
-import com.example.springBoot.model.material.SheetMaterial;
-import com.example.springBoot.model.material.Wood;
+import com.example.springBoot.model.material.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +13,18 @@ public class ProductSchema {
         List<SheetMaterial> productSchema = new ArrayList<>();
         switch (type) {
             case DESK:
-                SheetMaterial m1 = new Mdf(color, productCount);
-                SheetMaterial m2 = new Wood(color, 4 * productCount);
-                productSchema.add(m1);
-                productSchema.add(m2);
+                productSchema.add(new Mdf(color, productCount));
+                productSchema.add(new Wood(color, 4 * productCount));
+                return productSchema;
+            case CHAIR:
+                productSchema.add(new Chipboard(color, productCount));
+                productSchema.add(new Wood(color, 4 * productCount));
+                return productSchema;
+            case CUPBOARD:
+                productSchema.add(new Chipboard(color, 6 * productCount));
+                productSchema.add(new Wood(color, 2 * productCount));
+                productSchema.add(new Glass(color, 2 * productCount));
+                productSchema.add(new Mdf(color, productCount));
                 return productSchema;
             default:
                 return null;

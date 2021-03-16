@@ -1,4 +1,4 @@
-package com.example.springBoot.model.v1;
+package com.example.v1.model;
 
 
 import org.springframework.context.annotation.Bean;

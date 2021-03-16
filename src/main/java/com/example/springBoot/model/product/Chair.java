@@ -8,19 +8,18 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 
+
 @Entity
-@DiscriminatorValue("desk")
+@DiscriminatorValue("chair")
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Desk extends Product {
+public class Chair extends Product {
 
-    public Desk(Color color, @Min(value = 0) int materialsCount) {
+    public Chair(Color color, @Min(value = 0) int materialsCount) {
         super(color, materialsCount);
-        setProductType(ProductType.DESK);
+        setProductType(ProductType.CHAIR);
     }
 
-    public Desk() {
-        setProductType(ProductType.DESK);
+    public Chair() {
+        setProductType(ProductType.CHAIR);
     }
-
-
 }
