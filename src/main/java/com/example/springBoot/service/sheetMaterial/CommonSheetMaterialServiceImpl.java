@@ -14,13 +14,21 @@ public class CommonSheetMaterialServiceImpl extends SheetMaterialServiceImpl<She
 
     public boolean findAllByProductSchema(List<SheetMaterial> schema) {
 
+        boolean b = true;
+
         for (SheetMaterial material : schema) {
             SheetMaterial sheetMaterial = findByMaterial(material);
+
+            if (sheetMaterial.getMaterialsCount() < material.getMaterialsCount()) {
+                b = false;
+            }
+
             if (sheetMaterial == null) {
-                return false;
+                b = false;
             }
         }
-        return true;
+
+        return b;
     }
 
     public void deleteAllByProductSchema(List<SheetMaterial> schema) {
@@ -30,6 +38,21 @@ public class CommonSheetMaterialServiceImpl extends SheetMaterialServiceImpl<She
                 SheetMaterial newMaterial = findByMaterial(material);
 
                 int materialsCount = newMaterial.getMaterialsCount() - material.getMaterialsCount();
+
+                newMaterial.setMaterialsCount(materialsCount);
+
+                update(newMaterial);
+            }
+        }
+    }
+
+    public void addAllByProductSchema(List<SheetMaterial> schema) {
+        if (findAllByProductSchema(schema)) {
+            for (SheetMaterial material : schema) {
+
+                SheetMaterial newMaterial = findByMaterial(material);
+
+                int materialsCount = material.getMaterialsCount() + newMaterial.getMaterialsCount();
 
                 newMaterial.setMaterialsCount(materialsCount);
 

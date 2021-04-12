@@ -10,6 +10,8 @@ public interface ProductService <T extends Product> {
 
     void save(T newProduct);
 
+    void save(ProductType type, Color color, int productCount);
+
     boolean create (ProductType type, Color color, int productCount);
 
     void update(T newProduct);

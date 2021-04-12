@@ -30,7 +30,6 @@ public abstract class Product {
 
     private ProductType productType;
 
-    @NotEmpty
     private Color color;
 
     @Min(value = 0)
