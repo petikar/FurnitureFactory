@@ -8,10 +8,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Inheritance
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "productType")
@@ -28,16 +27,18 @@ public abstract class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(value = EnumType.STRING)
     private ProductType productType;
 
+    @Enumerated(value = EnumType.STRING)
     private Color color;
 
     @Min(value = 0)
-    private int productCount;
+    private int productsCount;
 
-    public Product(Color color, @Min(value = 0) int productCount) {
+    public Product(Color color, @Min(value = 0) int productsCount) {
         this.color = color;
-        this.productCount = productCount;
+        this.productsCount = productsCount;
     }
 
     public Product() {
@@ -67,12 +68,12 @@ public abstract class Product {
         this.color = color;
     }
 
-    public int getProductCount() {
-        return productCount;
+    public int getProductsCount() {
+        return productsCount;
     }
 
-    public void setProductCount(int materialsCount) {
-        this.productCount = materialsCount;
+    public void setProductsCount(int materialsCount) {
+        this.productsCount = materialsCount;
     }
 
     @Override
@@ -81,7 +82,7 @@ public abstract class Product {
                 "id=" + id +
                 ", productType=" + productType +
                 ", color=" + color +
-                ", productCount=" + productCount +
+                ", productsCount=" + productsCount +
                 '}';
     }
 }

@@ -32,7 +32,7 @@ public class ProductServiceImpl<T extends Product, R extends ProductBaseReposito
     }
 
     @Override
-    public void save(ProductType type, Color color, int productCount){
+    public void save(ProductType type, Color color, int productCount) {
         switch (type) {
             case DESK:
                 Desk desk = new Desk(color, productCount);
@@ -69,9 +69,9 @@ public class ProductServiceImpl<T extends Product, R extends ProductBaseReposito
 
         ProductType type = newProduct.getProductType();
         Color color = newProduct.getColor();
-        int newProductCount = newProduct.getProductCount();
-        int productCount = findByProduct(newProduct).getProductCount();
-        int difference = newProductCount-productCount;
+        int newProductCount = newProduct.getProductsCount();
+        int productCount = findByProduct(newProduct).getProductsCount();
+        int difference = newProductCount - productCount;
 
         if (productCount < newProductCount) {
             List<SheetMaterial> schema = ProductSchema.setProductSchema(type, color, difference);
@@ -82,14 +82,11 @@ public class ProductServiceImpl<T extends Product, R extends ProductBaseReposito
 
             }
 
-        } else if (difference<0) {
+        } else if (difference < 0) {
             List<SheetMaterial> schema = ProductSchema.setProductSchema(type, color, -difference);
             service.addAllByProductSchema(schema);
             save(newProduct);
         }
-
-
-
     }
 
     @Override
@@ -98,8 +95,12 @@ public class ProductServiceImpl<T extends Product, R extends ProductBaseReposito
     }
 
     @Override
+    /**
+     * The method returns null if database doesn't contain product
+     */
     public T findById(int id) {
-        return repository.getOne(id);
+        //return repository.getOne(id);
+        return repository.findById(id).orElse(null);
     }
 
     @Override

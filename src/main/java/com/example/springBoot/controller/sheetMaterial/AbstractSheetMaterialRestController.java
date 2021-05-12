@@ -52,7 +52,7 @@ public abstract class AbstractSheetMaterialRestController<T extends SheetMateria
 
         service.save(newMaterial);
 
-        return new ResponseEntity<>(newMaterial, HttpStatus.CREATED);
+        return new ResponseEntity<>(service.findByMaterial(newMaterial), HttpStatus.CREATED);
 
     }
 
@@ -65,6 +65,7 @@ public abstract class AbstractSheetMaterialRestController<T extends SheetMateria
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
+        material.setId(id);
         service.update(material);
 
         return new ResponseEntity<>(material, HttpStatus.OK);

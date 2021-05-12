@@ -11,7 +11,7 @@ import javax.validation.constraints.Min;
 import java.util.Objects;
 
 @Entity
-@Inheritance
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "materialType")
@@ -25,15 +25,16 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = Wood.class, name = "WOOD"),}
 )
 
-
 public abstract class SheetMaterial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(value = EnumType.STRING)
     private MaterialType materialType;
 
+    @Enumerated(value = EnumType.STRING)
     private Color color;
 
     @Min(value = 0)
