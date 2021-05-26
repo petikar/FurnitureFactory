@@ -11,7 +11,7 @@
 
     <label>Type</label>
     <select th:field="*{materialType}">
-        <option th:each="materialType : ${T(com.example.springBoot.model.enumClasses.MaterialType).values()}"
+        <option th:each="materialType : ${T(com.example.furnitureFactory.model.enumClasses.MaterialType).values()}"
                 th:value="${materialType}"
                 th:text="${materialType}">Choose the type material</option>
     </select>
@@ -21,7 +21,7 @@
 
     <label>Color</label>
     <select th:field="*{color}">
-        <option th:each="color : ${T(com.example.springBoot.model.enumClasses.Color).values()}"
+        <option th:each="color : ${T(com.example.furnitureFactory.model.enumClasses.Color).values()}"
                 th:value="${color}"
                 th:text="${color}">Choose the color material</option>
     </select>

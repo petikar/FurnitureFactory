@@ -18,7 +18,7 @@
 
     <label>Color</label>
     <select th:field="*{color}">
-        <option th:each="color : ${T(com.example.springBoot.model.enumClasses.Color).values()}"
+        <option th:each="color : ${T(com.example.furnitureFactory.model.enumClasses.Color).values()}"
                 th:value="${color}"
                 th:text="${color}">Choose the color material</option>
     </select>

@@ -1,36 +1,51 @@
-package com.example.v1.model;
+package com.example.furnitureFactory.model.material;
 
-
-import com.example.furnitureFactory.model.enumClasses.MaterialType;
 import com.example.furnitureFactory.model.enumClasses.Color;
+import com.example.furnitureFactory.model.enumClasses.MaterialType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Material implements Serializable {
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "materialType")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Mdf.class, name = "MDF"),
+
+        @JsonSubTypes.Type(value = Chipboard.class, name = "CHIPBOARD"),
+
+        @JsonSubTypes.Type(value = Glass.class, name = "GLASS"),
+
+        @JsonSubTypes.Type(value = Wood.class, name = "WOOD"),}
+)
+
+public abstract class SheetMaterial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(value = EnumType.STRING)
     private MaterialType materialType;
 
+    @Enumerated(value = EnumType.STRING)
     private Color color;
 
     @Min(value = 0)
     private int materialsCount;
 
-    public Material(Color color, @Min(value = 0) int materialsCount) {
+    public SheetMaterial(Color color, @Min(value = 0) int materialsCount) {
         this.color = color;
         this.materialsCount = materialsCount;
     }
 
-    public Material() {
+    public SheetMaterial() {
     }
 
     public int getId() {
@@ -79,11 +94,11 @@ public class Material implements Serializable {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Material material = (Material) o;
+        SheetMaterial material = (SheetMaterial) o;
 
         if (id == material.id) {
             return true;
-        } else if (materialType==material.materialType && color==material.color) {
+        } else if (materialType == material.materialType && color == material.color) {
             return true;
         } else return false;
     }
@@ -91,5 +106,15 @@ public class Material implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, materialType, color);
+    }
+
+    @Override
+    public String toString() {
+        return "SheetMaterial{" +
+                "id=" + id +
+                ", materialType=" + materialType +
+                ", color=" + color +
+                ", materialsCount=" + materialsCount +
+                '}';
     }
 }

@@ -36,3 +36,4 @@ build/
 *.jar
 *.ear
 
+pom.xml

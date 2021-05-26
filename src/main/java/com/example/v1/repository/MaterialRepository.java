@@ -2,7 +2,7 @@ package com.example.v1.repository;
 
 
 import com.example.v1.model.Material;
-import com.example.springBoot.model.enumClasses.*;
+import com.example.furnitureFactory.model.enumClasses.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
