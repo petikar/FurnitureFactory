@@ -20,8 +20,8 @@ public class Application {
 
         ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
 
-        for (String name : applicationContext.getBeanDefinitionNames()) {
+/*        for (String name : applicationContext.getBeanDefinitionNames()) {
             System.out.println(name);
-        }
+        }*/
     }
 }

@@ -1,6 +1,9 @@
 package com.example.furnitureFactory.aspectLogger;
 
 
+import com.example.furnitureFactory.Application;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -20,30 +23,34 @@ public class MyLogger {
 
     @Pointcut("execution(void com.example.furnitureFactory.*.*.*.*(..))")
     public void callVoidLogger() {
- }
+    }
 
+    private static final Logger logger = LogManager.getLogger(Application.class);
 
     @Around("callVoidLogger()")
     public void logVoidCall(ProceedingJoinPoint proceedingJoinPoint) {
         Signature methodName = proceedingJoinPoint.getSignature();
         Object[] args = proceedingJoinPoint.getArgs();
-        System.out.println("Method " + methodName + " was called with args: " + Arrays.toString(args));
-            try {
-                proceedingJoinPoint.proceed();
-                System.out.println("Method " + methodName + " returns void");
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+        //  System.out.println("Method " + methodName + " was called with args: " + Arrays.toString(args));
+        logger.debug("Method " + methodName + " was called with args: " + Arrays.toString(args));
+        try {
+            proceedingJoinPoint.proceed();
+            logger.debug("Method " + methodName + " returns void");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Around("callLogger()&&!callVoidLogger()")
     public Object logCall(ProceedingJoinPoint proceedingJoinPoint) {
         Signature methodName = proceedingJoinPoint.getSignature();
         Object[] args = proceedingJoinPoint.getArgs();
-        System.out.println("Method " + methodName + " was called with args: " + Arrays.toString(args));
+        //System.out.println("Method " + methodName + " was called with args: " + Arrays.toString(args));
+        logger.debug("Method " + methodName + " was called with args: " + Arrays.toString(args));
         try {
             Object result = proceedingJoinPoint.proceed();
-            System.out.println("Method " + methodName + " returns " + result);
+            //System.out.println("Method " + methodName + " returns " + result);
+            logger.debug("Method " + methodName + " returns " + result);
             return result;
         } catch (Throwable throwable) {
             throwable.printStackTrace();
